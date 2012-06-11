@@ -33,6 +33,7 @@ ab -n 10000 -c 50 -k http://localhost:9292/health/ping
 ## TL;DR
 
 Unicorn: Requests per second:    1493.28 [#/sec] (mean)
+
 Puma: Requests per second:    782.52 [#/sec] (mean)
 
 ## Unicorn
