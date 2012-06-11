@@ -1,6 +1,7 @@
 # puma-benchmarking
 
-Benchmarking for [puma.io](http://puma.io).
+Benchmarking for [Puma](http://puma.io). Exercise in trying to benchmark Puma against Unicorn 
+to try and replicate the benchmarking results on the [Puma](http://puma.io) site.
 
 # Setup
 
