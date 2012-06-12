@@ -23,7 +23,7 @@ bundle install
 puma -t 4:4
 ```
 
-## Running under Rubinius / Puma
+## Running under Rubinius - 1.8.7 / Puma
 
 ```
 rvm use rbx-1.2.4@puma-benchmarking --create
@@ -131,7 +131,7 @@ Percentage of the requests served within a certain time (ms)
  100%    634 (longest request)
 ```
 
-## Rubinius / Puma
+## Rubinius - 1.8.7 / Puma
 
 ```
 Server Software:        
