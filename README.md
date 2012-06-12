@@ -4,6 +4,23 @@ Benchmarking for [Puma](http://puma.io). Exercise in trying to benchmark Puma ag
 to try and replicate the benchmarking results on the [Puma](http://puma.io) site. At the very 
 least just see how Puma stacks up.
 
+# Hardware Profile
+
+This is the primary machine I am running these benchmarks on:
+
+```
+Model Name: iMac
+Model Identifier: iMac11,2
+Processor Name: Intel Core i3
+Processor Speed:  3.06 GHz
+Number Of Processors: 1
+Total Number Of Cores:  2
+L2 Cache (per core):  256 KB
+L3 Cache: 4 MB
+Memory: 4 GB
+Processor Interconnect Speed: 5.86 GT/s
+```
+
 # Setup
 
 Run under Unicorn or Puma in one terminal and then run the benchmarking in another terminal.
