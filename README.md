@@ -1,13 +1,14 @@
 # puma-benchmarking
 
 Benchmarking for [Puma](http://puma.io). Exercise in trying to benchmark Puma against Unicorn 
-to try and replicate the benchmarking results on the [Puma](http://puma.io) site.
+to try and replicate the benchmarking results on the [Puma](http://puma.io) site. At the very 
+least just see how Puma stacks up.
 
 # Setup
 
 Run under Unicorn or Puma in one terminal and then run the benchmarking in another terminal.
 
-## Running under MRI - 1.9.3 /Unicorn
+## Running under MRI - 1.9.3 / Unicorn
 
 ```
 rvm use ruby-1.9.3@puma-benchmarking --create
@@ -15,7 +16,7 @@ bundle install
 unicorn -c unicorn.rb
 ```
 
-## Running under JRuby - 1.9 / Puma
+## Running under JRuby (1.6.7.2) - 1.9.2 / Puma
 
 ```
 rvm use jruby-1.6.7.2@puma-benchmarking --create
@@ -23,10 +24,18 @@ bundle install
 puma -t 4:4
 ```
 
-## Running under Rubinius - 1.8.7 / Puma
+## Running under Rubinius (1.2.4) - 1.8.7 / Puma
 
 ```
 rvm use rbx-1.2.4@puma-benchmarking --create
+bundle install
+puma -t 4:4
+```
+
+## Running under Rubinius (Head) - 1.9.3 / Puma
+
+```
+rvm use rbx-head@puma-benchmarking --create
 bundle install
 puma -t 4:4
 ```
@@ -43,9 +52,11 @@ ab -n 10000 -c 50 -k http://localhost:9292/health/ping
 
 MRI - 1.9.3 / Unicorn: Requests per second:    1493.28 [#/sec] (mean)
 
-JRuby - 1.9 / Puma: Requests per second:    782.52 [#/sec] (mean)
+JRuby (1.6.7.2) - 1.9.2 / Puma: Requests per second:    782.52 [#/sec] (mean)
 
-Rubinius / Puma: Requests per second:    55.09 [#/sec] (mean)
+Rubinius (1.2.4) - 1.8.7 / Puma: Requests per second:    55.09 [#/sec] (mean)
+
+Rubinius (Head) - 1.9.3 / Puma: Requests per second:    1225.02 [#/sec] (mean)
 
 ## MRI - 1.9.3 / Unicorn
 
@@ -89,7 +100,7 @@ Percentage of the requests served within a certain time (ms)
  100%     72 (longest request)
  ```
 
-## JRuby - 1.9 / Puma
+## JRuby (1.6.7.2) - 1.9.2 / Puma
 
 ```
 Server Software:        
@@ -131,7 +142,7 @@ Percentage of the requests served within a certain time (ms)
  100%    634 (longest request)
 ```
 
-## Rubinius - 1.8.7 / Puma
+## Rubinius (1.2.4) - 1.8.7 / Puma
 
 ```
 Server Software:        
@@ -173,4 +184,46 @@ Percentage of the requests served within a certain time (ms)
   98%     68
   99%    142
  100%  181517 (longest request)
+```
+
+## Rubinius (Head) - 1.9.3 / Puma
+
+```
+Server Software:        
+Server Hostname:        127.0.0.1
+Server Port:            9292
+
+Document Path:          /health/ping
+Document Length:        29 bytes
+
+Concurrency Level:      50
+Time taken for tests:   8.163 seconds
+Complete requests:      10000
+Failed requests:        0
+Write errors:           0
+Keep-Alive requests:    10000
+Total transferred:      1240000 bytes
+HTML transferred:       290000 bytes
+Requests per second:    1225.02 [#/sec] (mean)
+Time per request:       40.816 [ms] (mean)
+Time per request:       0.816 [ms] (mean, across all concurrent requests)
+Transfer rate:          148.34 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     1    2   5.4      1     367
+Waiting:        1    2   5.4      1     367
+Total:          1    2   5.4      1     368
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      2
+  95%      5
+  98%      7
+  99%      8
+ 100%    368 (longest request)
 ```
