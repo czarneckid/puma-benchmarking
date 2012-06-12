@@ -1,4 +1,5 @@
 rvm ruby-1.9.3@puma-benchmarking --create
 rvm jruby-1.6.7.2@puma-benchmarking --create
+rvm jruby-1.7.0.preview1@puma-benchmarking --create
 rvm rbx-1.2.4@puma-benchmarking --create
 rvm rbx-head@puma-benchmarking --create

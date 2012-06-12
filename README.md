@@ -24,6 +24,14 @@ bundle install
 ruby --1.9 `which puma` -t 4:4
 ```
 
+## Running under JRuby (1.7.0.preview1) / Puma
+
+```
+rvm jruby-1.7.0.preview1@puma-benchmarking --create
+bundle install
+puma -t 4:4
+```
+
 ## Running under Rubinius (1.2.4) - 1.8.7 / Puma
 
 ```
@@ -53,6 +61,11 @@ ab -n 10000 -c 50 -k http://localhost:9292/health/ping
 MRI - 1.9.3 / Unicorn: Requests per second:    1493.28 [#/sec] (mean)
 
 JRuby (1.6.7.2) - 1.9.2 / Puma: Requests per second:    1460.20 [#/sec] (mean)
+
+JRuby (1.7.0.preview1) - 1.9.3 / Puma: Requests per second:    1093.26 [#/sec] (mean)
+NOTE: Initial run after starting Puma
+JRuby (1.7.0.preview1) - 1.9.3 / Puma: Requests per second:    4044.04 [#/sec] (mean)
+NOTE: 2nd run of the benchmarks. VM is doing optimization.
 
 Rubinius (1.2.4) - 1.8.7 / Puma: Requests per second:    55.09 [#/sec] (mean)
 
@@ -140,6 +153,91 @@ Percentage of the requests served within a certain time (ms)
   98%      5
   99%      5
  100%      7 (longest request)
+```
+
+## JRuby (1.7.0.preview1) - 1.9.3 / Puma (Initial run)
+
+```
+Server Software:        
+Server Hostname:        localhost
+Server Port:            9292
+
+Document Path:          /health/ping
+Document Length:        29 bytes
+
+Concurrency Level:      50
+Time taken for tests:   9.147 seconds
+Complete requests:      10000
+Failed requests:        1
+   (Connect: 0, Receive: 0, Length: 1, Exceptions: 0)
+Write errors:           0
+Keep-Alive requests:    9999
+Total transferred:      1239876 bytes
+HTML transferred:       289971 bytes
+Requests per second:    1093.26 [#/sec] (mean)
+Time per request:       45.735 [ms] (mean)
+Time per request:       0.915 [ms] (mean, across all concurrent requests)
+Transfer rate:          132.37 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     1    4  13.7      2     639
+Waiting:        0    3  13.5      2     639
+Total:          1    4  13.7      2     639
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      3
+  75%      4
+  80%      5
+  90%      7
+  95%     11
+  98%     16
+  99%     20
+ 100%    639 (longest request)
+```
+
+## JRuby (1.7.0.preview1) - 1.9.3 / Puma (2nd run)
+
+```
+Server Software:        
+Server Hostname:        localhost
+Server Port:            9292
+
+Document Path:          /health/ping
+Document Length:        29 bytes
+
+Concurrency Level:      50
+Time taken for tests:   2.424 seconds
+Complete requests:      10000
+Failed requests:        0
+Write errors:           0
+Keep-Alive requests:    10000
+Total transferred:      1240000 bytes
+HTML transferred:       290000 bytes
+Requests per second:    4125.61 [#/sec] (mean)
+Time per request:       12.119 [ms] (mean)
+Time per request:       0.242 [ms] (mean, across all concurrent requests)
+Transfer rate:          499.59 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.0      0       1
+Processing:     0    1   0.7      1      10
+Waiting:        0    1   0.6      1      10
+Total:          0    1   0.7      1      10
+
+Percentage of the requests served within a certain time (ms)
+  50%      1
+  66%      1
+  75%      1
+  80%      1
+  90%      2
+  95%      2
+  98%      3
+  99%      4
+ 100%     10 (longest request)
 ```
 
 ## Rubinius (1.2.4) - 1.8.7 / Puma
