@@ -80,8 +80,11 @@ MRI - 1.9.3 / Unicorn: Requests per second:    1493.28 [#/sec] (mean)
 JRuby (1.6.7.2) - 1.9.2 / Puma: Requests per second:    1460.20 [#/sec] (mean)
 
 JRuby (1.7.0.preview1) - 1.9.3 / Puma: Requests per second:    1093.26 [#/sec] (mean)
+
 NOTE: Initial run after starting Puma
+
 JRuby (1.7.0.preview1) - 1.9.3 / Puma: Requests per second:    4044.04 [#/sec] (mean)
+
 NOTE: 2nd run of the benchmarks. VM is doing optimization.
 
 Rubinius (1.2.4) - 1.8.7 / Puma: Requests per second:    55.09 [#/sec] (mean)
