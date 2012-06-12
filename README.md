@@ -21,7 +21,7 @@ unicorn -c unicorn.rb
 ```
 rvm use jruby-1.6.7.2@puma-benchmarking --create
 bundle install
-puma -t 4:4
+ruby --1.9 `which puma` -t 4:4
 ```
 
 ## Running under Rubinius (1.2.4) - 1.8.7 / Puma
@@ -37,7 +37,7 @@ puma -t 4:4
 ```
 rvm use rbx-head@puma-benchmarking --create
 bundle install
-puma -t 4:4
+ruby -X19 `which puma` -t 4:4
 ```
 
 ## Benchmarking with ab
@@ -52,7 +52,7 @@ ab -n 10000 -c 50 -k http://localhost:9292/health/ping
 
 MRI - 1.9.3 / Unicorn: Requests per second:    1493.28 [#/sec] (mean)
 
-JRuby (1.6.7.2) - 1.9.2 / Puma: Requests per second:    782.52 [#/sec] (mean)
+JRuby (1.6.7.2) - 1.9.2 / Puma: Requests per second:    1460.20 [#/sec] (mean)
 
 Rubinius (1.2.4) - 1.8.7 / Puma: Requests per second:    55.09 [#/sec] (mean)
 
@@ -104,42 +104,42 @@ Percentage of the requests served within a certain time (ms)
 
 ```
 Server Software:        
-Server Hostname:        localhost
+Server Hostname:        127.0.0.1
 Server Port:            9292
 
 Document Path:          /health/ping
 Document Length:        29 bytes
 
 Concurrency Level:      50
-Time taken for tests:   12.779 seconds
+Time taken for tests:   6.848 seconds
 Complete requests:      10000
 Failed requests:        0
 Write errors:           0
 Keep-Alive requests:    10000
 Total transferred:      1240000 bytes
 HTML transferred:       290000 bytes
-Requests per second:    782.52 [#/sec] (mean)
-Time per request:       63.896 [ms] (mean)
-Time per request:       1.278 [ms] (mean, across all concurrent requests)
-Transfer rate:          94.76 [Kbytes/sec] received
+Requests per second:    1460.20 [#/sec] (mean)
+Time per request:       34.242 [ms] (mean)
+Time per request:       0.685 [ms] (mean, across all concurrent requests)
+Transfer rate:          176.82 [Kbytes/sec] received
 
 Connection Times (ms)
               min  mean[+/-sd] median   max
 Connect:        0    0   0.0      0       1
-Processing:     1    5  13.6      3     632
-Waiting:        0    5  13.4      3     630
-Total:          1    5  13.6      3     634
+Processing:     1    2   1.0      2       6
+Waiting:        1    2   0.9      2       6
+Total:          1    2   1.0      2       7
 
 Percentage of the requests served within a certain time (ms)
-  50%      3
-  66%      4
-  75%      5
-  80%      6
-  90%      9
-  95%     13
-  98%     19
-  99%     24
- 100%    634 (longest request)
+  50%      2
+  66%      2
+  75%      3
+  80%      3
+  90%      3
+  95%      4
+  98%      5
+  99%      5
+ 100%      7 (longest request)
 ```
 
 ## Rubinius (1.2.4) - 1.8.7 / Puma
