@@ -7,7 +7,7 @@ to try and replicate the benchmarking results on the [Puma](http://puma.io) site
 
 Run under Unicorn or Puma in one terminal and then run the benchmarking in another terminal.
 
-## Running under Unicorn
+## Running under MRI - 1.9.3 /Unicorn
 
 ```
 rvm use ruby-1.9.3@puma-benchmarking --create
@@ -15,10 +15,18 @@ bundle install
 unicorn -c unicorn.rb
 ```
 
-## Running under Puma
+## Running under JRuby - 1.9 / Puma
 
 ```
 rvm use jruby-1.6.7.2@puma-benchmarking --create
+bundle install
+puma -t 4:4
+```
+
+## Running under Rubinius / Puma
+
+```
+rvm use rbx-1.2.4@puma-benchmarking --create
 bundle install
 puma -t 4:4
 ```
@@ -33,11 +41,13 @@ ab -n 10000 -c 50 -k http://localhost:9292/health/ping
 
 ## TL;DR
 
-Unicorn: Requests per second:    1493.28 [#/sec] (mean)
+MRI - 1.9.3 / Unicorn: Requests per second:    1493.28 [#/sec] (mean)
 
-Puma: Requests per second:    782.52 [#/sec] (mean)
+JRuby - 1.9 / Puma: Requests per second:    782.52 [#/sec] (mean)
 
-## Unicorn
+Rubinius / Puma: Requests per second:    55.09 [#/sec] (mean)
+
+## MRI - 1.9.3 / Unicorn
 
 ```
 Server Software:        
@@ -79,7 +89,7 @@ Percentage of the requests served within a certain time (ms)
  100%     72 (longest request)
  ```
 
-## Puma
+## JRuby - 1.9 / Puma
 
 ```
 Server Software:        
@@ -119,4 +129,48 @@ Percentage of the requests served within a certain time (ms)
   98%     19
   99%     24
  100%    634 (longest request)
+```
+
+## Rubinius / Puma
+
+```
+Server Software:        
+Server Hostname:        127.0.0.1
+Server Port:            9292
+
+Document Path:          /health/ping
+Document Length:        2103 bytes
+
+Concurrency Level:      50
+Time taken for tests:   181.526 seconds
+Complete requests:      10000
+Failed requests:        9989
+   (Connect: 0, Receive: 0, Length: 9989, Exceptions: 0)
+Write errors:           0
+Non-2xx responses:      38
+Keep-Alive requests:    9976
+Total transferred:      1326386 bytes
+HTML transferred:       379084 bytes
+Requests per second:    55.09 [#/sec] (mean)
+Time per request:       907.631 [ms] (mean)
+Time per request:       18.153 [ms] (mean, across all concurrent requests)
+Transfer rate:          7.14 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   0.3      0      10
+Processing:     1  304 5697.1      2  181511
+Waiting:        0  467 7508.0      1  181511
+Total:          1  304 5697.4      2  181517
+
+Percentage of the requests served within a certain time (ms)
+  50%      2
+  66%      3
+  75%      4
+  80%      5
+  90%     10
+  95%     28
+  98%     68
+  99%    142
+ 100%  181517 (longest request)
 ```

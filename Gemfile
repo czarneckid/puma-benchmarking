@@ -1,11 +1,9 @@
 source :rubygems
 
-gem 'grape', :git => 'git://github.com/intridea/grape.git', :branch => 'frontier'
+gem 'grape'
 
 platforms :ruby do
   gem 'unicorn'
 end
 
-platforms :jruby do
-  gem 'puma'
-end
+gem 'puma'
