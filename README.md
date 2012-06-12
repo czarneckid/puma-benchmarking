@@ -24,7 +24,7 @@ bundle install
 ruby --1.9 `which puma` -t 4:4
 ```
 
-## Running under JRuby (1.7.0.preview1) / Puma
+## Running under JRuby (1.7.0.preview1) - 1.9.3 / Puma
 
 ```
 rvm jruby-1.7.0.preview1@puma-benchmarking --create
