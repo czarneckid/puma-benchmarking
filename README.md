@@ -33,6 +33,14 @@ bundle install
 unicorn -c unicorn.rb
 ```
 
+## Running under MRI - 1.9.3 / Rainbows
+
+```
+rvm use ruby-1.9.3@puma-benchmarking --create
+bundle install
+rainbows -c unicorn.rb
+```
+
 ## Running under JRuby (1.6.7.2) - 1.9.2 / Puma
 
 ```
